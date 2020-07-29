@@ -1,0 +1,209 @@
+{% extends "layout.html" %}
+
+
+{% block content %}
+
+	{% with errors = get_flashed_messages(category_filter=["error"]) %}
+		{% if errors %}
+			<div class="alert alert-dismissible alert-danger">
+ 					<button type="button" class="close" data-dismiss="alert">&times;</button>
+  						<ul>
+    						{%- for msg in errors %}
+    							<li><p class="lead">{{msg}}</p></li>
+    						{% endfor -%}
+ 						</ul>			 
+			</div>
+		{% endif %}
+	{% endwith %}
+
+	{% with successes = get_flashed_messages(category_filter=["success"]) %}
+			{% if successes %}
+				<div class="alert alert-dismissible alert-success">
+  					<button type="button" class="close" data-dismiss="alert">&times;</button>
+  						<ul>
+    						{%- for msg in successes %}
+    							<li><p class="lead">{{msg}}</p></li>
+    						{% endfor -%}
+ 						</ul>	
+				</div>
+		{% endif %}
+	{% endwith %}
+	
+
+	<form method="POST" action="/predict">
+
+		<div class="jumbotron">
+  			<h4 class="display-5">¡Hola! Bienvenidos al predictor de divorcios.</h4>
+  			<p class="lead">Consideraciones importantes.</p>
+
+  			<p class="lead">La predicción fue creada por medio de una regresión logística con una red neuronal artifical.
+				No te lo tomes en serio, el objetivo del proyecto es el de entretener, si en verdad sientes que algo va mal en tu relación, háblalo con tu pareja y de ser posible vayan a un especialista.
+			</p>
+			<p class="lead">	LA PREDICCIÓN NO INCITA A SEPARACIONES MATRIMONIALES.</p>
+  			<hr class="my-4">
+  			 <p class="lead">Este es un modelo basado en el siguiente conjunto de datos:</p>
+  			<a href="https://archive.ics.uci.edu/ml/datasets/Divorce+Predictors+data+set">Liga al conjunto de datos</a>
+		</div>
+<!-- 	<div class="alert alert-success" role="alert">
+	  		<h3 class="alert-heading">¡Hola! Bienvenidos al predictor de divorcios.</h3>
+			<h4 class="alert-heading">Consideraciones importantes</h4>
+			
+			<p> Este es un modelo basado en el siguiente conjunto de datos:</p>
+			<a href="https://archive.ics.uci.edu/ml/datasets/Divorce+Predictors+data+set">Liga al conjunto de datos</a>
+			<p>La predicción fue creada por medio de una regresión logística con una red neuronal artifical.
+				No te lo tomes en serio, el objetivo del proyecto es el de entretener, si en verdad sientes que algo va mal en tu relación, háblalo con tu pareja y de ser posible vayan a un especialista.
+			</p>
+			<p>	LA PREDICCIÓN NO INCITA A SEPARACIONES MATRIMONIALES.</p>
+			<h7> Selecciona la opción que mejor describa tu respuesta.</h7>
+		</div> -->
+
+		<!-- PRIMERA PREGUNTA -->
+		<p class="lead">Selecciona la opción que mejor describa tu respuesta.</p>
+		<p class="h4">1. Compartimos los mismos puntos de vista sobre ser feliz en nuestra vida como esposos.</p>
+
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline01" name="question0" class="custom-control-input" value="0">
+	  		<label class="custom-control-label" for="customRadioInline01">Siempre</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline02" name="question0" class="custom-control-input" value="1">
+	  		<label class="custom-control-label" for="customRadioInline02">Frecuentemente</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline03" name="question0" class="custom-control-input" value="2">
+	  		<label class="custom-control-label" for="customRadioInline03">Medianamente</label>
+		</div>
+			<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline04" name="question0" class="custom-control-input" value="3">
+	  		<label class="custom-control-label" for="customRadioInline04">Raramente</label>
+		</div>
+			<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline05" name="question0" class="custom-control-input" value="4">
+	  		<label class="custom-control-label" for="customRadioInline05">Nunca</label>
+		</div>
+
+		<!-- SEGUNDA PREGUNTA -->
+		<hr>
+		<p class="h4">2. Mi pareja y yo tenemos ideas similares de cómo deben ser los roles en el matrimonio.</p>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline11" name="question1" class="custom-control-input" value="0">
+	  		<label class="custom-control-label" for="customRadioInline11">Siempre</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline12" name="question1" class="custom-control-input" value="1">
+	  		<label class="custom-control-label" for="customRadioInline12">Frecuentemente</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline13" name="question1" class="custom-control-input" value="2">
+	  		<label class="custom-control-label" for="customRadioInline13">Medianamente</label>
+		</div>
+			<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline14" name="question1" class="custom-control-input" value="3">
+	  		<label class="custom-control-label" for="customRadioInline14">Raramente</label>
+		</div>
+			<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline15" name="question1" class="custom-control-input" value="4">
+	  		<label class="custom-control-label" for="customRadioInline15">Nunca</label>
+		</div>
+
+		<!-- TERCERA PREGUNTA -->
+		<hr>
+		<p class="h4">3. Mi cónyuge y yo tenemos ideas similares de cómo debería ser el matrimonio.</p>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline21" name="question2" class="custom-control-input" value="0">
+	  		<label class="custom-control-label" for="customRadioInline21">Siempre</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline22" name="question2" class="custom-control-input" value="1">
+	  		<label class="custom-control-label" for="customRadioInline22">Frecuentemente</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline23" name="question2" class="custom-control-input" value="2">
+	  		<label class="custom-control-label" for="customRadioInline23">Medianamente</label>
+		</div>
+			<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline24" name="question2" class="custom-control-input" value="3">
+	  		<label class="custom-control-label" for="customRadioInline24">Raramente</label>
+		</div>
+			<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline25" name="question2" class="custom-control-input" value="4">
+	  		<label class="custom-control-label" for="customRadioInline25">Nunca</label>
+		</div>
+
+		<!-- CUARTA PREGUNTA -->
+		<hr>
+		<p class="h4">4. Creo que un día en el futuro, cuando mire hacia atrás, veo que mi pareja y yo hemos estado en armonía el uno con el otro.</p>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline31" name="question3" class="custom-control-input" value="0">
+	  		<label class="custom-control-label" for="customRadioInline31">Siempre</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline32" name="question3" class="custom-control-input" value="1">
+	  		<label class="custom-control-label" for="customRadioInline32">Frecuentemente</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline33" name="question3" class="custom-control-input" value="2">
+	  		<label class="custom-control-label" for="customRadioInline33">Medianamente</label>
+		</div>
+			<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline34" name="question3" class="custom-control-input" value="3">
+	  		<label class="custom-control-label" for="customRadioInline34">Raramente</label>
+		</div>
+			<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline35" name="question3" class="custom-control-input" value="4">
+	  		<label class="custom-control-label" for="customRadioInline35">Nunca</label>
+		</div>
+
+
+		<!-- QUINTA PREGUNTA -->
+		<hr>
+		<p class="h4">5. Disfruto viajar con mi cónyuge.</p>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline41" name="question4" class="custom-control-input" value="0">
+	  		<label class="custom-control-label" for="customRadioInline41">Siempre</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline42" name="question4" class="custom-control-input" value="1">
+	  		<label class="custom-control-label" for="customRadioInline42">Frecuentemente</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline43" name="question4" class="custom-control-input" value="2">
+	  		<label class="custom-control-label" for="customRadioInline43">Medianamente</label>
+		</div>
+			<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline44" name="question4" class="custom-control-input" value="3">
+	  		<label class="custom-control-label" for="customRadioInline44">Raramente</label>
+		</div>
+			<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline45" name="question4" class="custom-control-input" value="4">
+	  		<label class="custom-control-label" for="customRadioInline45">Nunca</label>
+		</div>
+
+		<!-- SEXTA PREGUNTA -->
+		<hr>
+		<p class="h4">6. Mi pareja y yo tenemos valores similares en cuestión de confianza.</p>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline61" name="question5" class="custom-control-input" value="0">
+	  		<label class="custom-control-label" for="customRadioInline61">Siempre</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline62" name="question5" class="custom-control-input" value="1">
+	  		<label class="custom-control-label" for="customRadioInline62">Frecuentemente</label>
+		</div>
+		<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline63" name="question5" class="custom-control-input" value="2">
+	  		<label class="custom-control-label" for="customRadioInline63">Medianamente</label>
+		</div>
+			<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline64" name="question5" class="custom-control-input" value="3">
+	  		<label class="custom-control-label" for="customRadioInline64">Raramente</label>
+		</div>
+			<div class="custom-control custom-radio custom-control-inline">
+	  		<input type="radio" id="customRadioInline65" name="question5" class="custom-control-input" value="4">
+	  		<label class="custom-control-label" for="customRadioInline65">Nunca</label>
+		</div>
+		<hr>
+		<button type="submit" class="btn btn-primary">Enviar Cuestionario</button>
+	</form>
+
+{% endblock %}
