@@ -5,3 +5,6 @@ Principalmente es un cuestionario de 6 preguntas y te calcula la probabilidad de
 https://github.com/amigo20th/Regresion_Logistica_Divorcios
 
 Pero difiere en que aquí tomamos las 6 preguntas con mayor correlación a la clase (quitamos la primer pregunta por ambigúedad).
+
+Puedes probar la apliación en el siguiente enlace:
+https://shielded-sea-63611.herokuapp.com/
